@@ -1,0 +1,11 @@
+#modal {
+    display:block;
+    position: initial;
+
+}
+
+#modalBackground {
+    background:rgba(131, 255, 131, 0.885);
+}
+
+

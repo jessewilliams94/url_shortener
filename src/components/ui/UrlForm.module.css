@@ -1,0 +1,11 @@
+#form_container {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+
+}
+
+#form {
+    
+}

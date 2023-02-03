@@ -1,0 +1,4 @@
+type Link @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  url: AWSURL
+} 
