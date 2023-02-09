@@ -1,19 +1,19 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-urlshortener-staging-155504-authRole",
-      "UnauthRoleArn": "arn:aws:iam::779459473896:role/amplify-urlshortener-staging-155504-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::779459473896:role/amplify-urlshortener-staging-155504-authRole",
+      "AuthRoleName": "amplify-urlshortener2-staging-15206-authRole",
+      "UnauthRoleArn": "arn:aws:iam::779459473896:role/amplify-urlshortener2-staging-15206-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::779459473896:role/amplify-urlshortener2-staging-15206-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-urlshortener-staging-155504-deployment",
-      "UnauthRoleName": "amplify-urlshortener-staging-155504-unauthRole",
-      "StackName": "amplify-urlshortener-staging-155504",
-      "StackId": "arn:aws:cloudformation:us-east-2:779459473896:stack/amplify-urlshortener-staging-155504/f5e6f980-a311-11ed-9da5-022ff447e452",
-      "AmplifyAppId": "d16v7pffqndou4"
+      "DeploymentBucketName": "amplify-urlshortener2-staging-15206-deployment",
+      "UnauthRoleName": "amplify-urlshortener2-staging-15206-unauthRole",
+      "StackName": "amplify-urlshortener2-staging-15206",
+      "StackId": "arn:aws:cloudformation:us-east-2:779459473896:stack/amplify-urlshortener2-staging-15206/87bf5e70-a42e-11ed-a710-06e14fa2cc00",
+      "AmplifyAppId": "d1crardsd758eu"
     },
     "categories": {
       "auth": {
-        "urlshortener": {}
+        "urlshortener2": {}
       }
     }
   }

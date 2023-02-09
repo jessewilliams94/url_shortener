@@ -32,4 +32,4 @@ function Home() {
 }
 
 
-export default withAuthenticator(Home);
+export default Home;

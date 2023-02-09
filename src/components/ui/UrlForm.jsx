@@ -32,7 +32,7 @@ const UrlForm = (props) => {
   };
   return (
     <>
-      <Container id={classes.form_container}>
+      
         <Row className="d-grid gap-2 justify-content-md-center text-center">
           <Col className="d-flex-row align-middle">
             <h2>Please submit your URL below.</h2>
@@ -54,7 +54,7 @@ const UrlForm = (props) => {
             </form>
           </Col>
         </Row>
-      </Container>
+
       
     </>
     // <Form>
