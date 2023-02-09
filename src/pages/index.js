@@ -5,8 +5,11 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import UrlModal from "@/components/ui/UrlModal";
 import { useState } from "react";
 import classes from './index.module.css';
+import LinkCreateForm from "@/ui-components/LinkCreateForm";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const modalClass = 'classes.modalWarning';
 
 function Home() {
   const [finalUrl, setFinalUrl] = useState();
@@ -26,7 +29,7 @@ function Home() {
         />
       </Head> */}
       <UrlForm urlSubmit={urlHandler}></UrlForm>
-      <UrlModal displayURL={finalUrl}></UrlModal>
+      <UrlModal id={modalClass} displayURL={finalUrl}></UrlModal>
     </ div>
   );
 }

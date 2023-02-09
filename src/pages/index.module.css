@@ -1,7 +1,11 @@
 #mainpage {
-    height:100vh;
-    width:100%;
+    height:100%;
+    width:50vw;
     overflow:hidden;
     display:flex;
     flex-direction: column;
+    background:beige;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 2rem;
 }
