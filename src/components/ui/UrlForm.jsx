@@ -69,7 +69,7 @@ const UrlForm = (props) => {
         <Row className="d-grid gap-2 justify-content-md-center text-center">
           <Col className="d-flex-row align-middle">
             <h2>Please submit your URL below.</h2>
-            <form method="post" action="/api/form" onSubmit={submitHandler}>
+            <form method="post" onSubmit={submitHandler}>
             
               <div className="d-grid">
                 {/* <label htmlFor="url-input">

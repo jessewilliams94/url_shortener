@@ -13,7 +13,7 @@ const UrlModal = (props) => {
                     <Modal.Title>{props.styleId.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
-                    <textarea readOnly rows="1" id={classes.textarea} className='form-control' type="text" value={props.displayURL} />
+                    <textarea readOnly rows="1" id={classes.textarea} className='form-control' type="text" value={props.displayURL || 'URL must look like > www.google.com'} />
                 </Modal.Body>
                 <Modal.Footer >
                     {/* {showCopyButton && <Button variant="outline-dark">Copy URL</Button>} */}

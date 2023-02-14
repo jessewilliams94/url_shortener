@@ -24,9 +24,7 @@ function Home() {
   const [showModal, setShowModal] = useState(false);
   const [modalStyle, setModalStyle] = useState(modalDataArray[0]);
   const urlHandler = (result) => {
-   
-
-    const newUrl = ('https://www.test.com/' + result);
+    let newUrl = ('https://www.test.com/' + result);
 
     setFinalUrl(newUrl);
     if (newUrl) {
@@ -36,6 +34,7 @@ function Home() {
   };
   const errorCatcher = (error) => {
     if (error) {
+      setFinalUrl('');
       setShowModal(true);
       setModalStyle(modalDataArray[2]);
     }
