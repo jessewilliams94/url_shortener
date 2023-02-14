@@ -4,15 +4,15 @@
 
 }
 
-#modalBackground {
+#modalSuccess {
     background:rgba(15, 236, 15, 0.885);
 }
 
-#modalError {
+#modalWarning {
     background: yellow;
 }
 
-#modalWarning {
+#modalError {
     background: rgb(255, 16, 16)
 }
 

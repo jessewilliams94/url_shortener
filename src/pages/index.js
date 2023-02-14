@@ -7,29 +7,43 @@ import { useState } from "react";
 import classes from './index.module.css';
 import LinkCreateForm from "@/ui-components/LinkCreateForm";
 
-const inter = Inter({ subsets: ["latin"] });
+const modalData = {
+  style: 'modalSuccess',
+  title: 'Success!',
+  showCopyButton: true
+};
 
-const modalClass = 'classes.modalWarning';
+const modalDataArray = [
+  {style: 'modalSuccess', title: 'Success!', showCopyButton: true},
+  {style: 'modalWarning', title: 'warning', showCopyButton: false},
+  {style: 'modalError', title: 'Error: Invalid URL.', showCopyButton: false}
+]
 
 function Home() {
   const [finalUrl, setFinalUrl] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const [modalStyle, setModalStyle] = useState(modalDataArray[0]);
   const urlHandler = (result) => {
+   
+
     const newUrl = ('https://www.test.com/' + result);
-    console.log(newUrl);
+
     setFinalUrl(newUrl);
+    if (newUrl) {
+      setModalStyle(modalDataArray[0]);
+      setShowModal(true);
+    }
+  };
+  const errorCatcher = (error) => {
+    if (error) {
+      setShowModal(true);
+      setModalStyle(modalDataArray[2]);
+    }
   };
   return (
     <div id={classes.mainpage}>
-      {/* <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-          crossorigin="anonymous"
-        />
-      </Head> */}
-      <UrlForm urlSubmit={urlHandler}></UrlForm>
-      <UrlModal id={modalClass} displayURL={finalUrl}></UrlModal>
+      <UrlForm errorSubmit={errorCatcher} urlSubmit={urlHandler}></UrlForm>
+      <UrlModal open={showModal} onClose={() => setShowModal(false)} showButton={modalStyle.showCopyButton} styleId={modalStyle} displayURL={finalUrl}></UrlModal>
     </ div>
   );
 }

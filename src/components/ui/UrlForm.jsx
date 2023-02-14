@@ -16,6 +16,10 @@ const UrlForm = (props) => {
   const [isEditing, setIsEditing] = useState(true);
 
   const generateShortUrlHandler = () => {
+    if (urlRef.current.value.length === 0) {
+      console.log('error');
+      return;
+    }
     let result = "";
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -32,13 +36,13 @@ const UrlForm = (props) => {
     event.preventDefault();
 
     let submittedURL = urlRef.current.value;
-
-    if (urlRef.length > 0) {
-      setValidUrl(true);
-    }
+    // if (urlRef.length > 0) {
+    //   setValidUrl(true);
+    // }
     if (submittedURL.trim().length === 0) {
       setValidUrl(false);
       setError(true);
+      props.errorSubmit(error);
       console.log('you need to type something')
       return;
     }
@@ -65,11 +69,12 @@ const UrlForm = (props) => {
         <Row className="d-grid gap-2 justify-content-md-center text-center">
           <Col className="d-flex-row align-middle">
             <h2>Please submit your URL below.</h2>
-            <form action="submit" onSubmit={submitHandler}>
+            <form method="post" action="/api/form" onSubmit={submitHandler}>
+            
               <div className="d-grid">
                 {/* <label htmlFor="url-input">
                 </label> */}
-                <input className={`${validUrl && classes.url} ${!validUrl && classes.invalid}`} type="text" ref={urlRef} /> 
+                <input name="url" className={`${validUrl && classes.url} ${!validUrl && classes.invalid}`}  ref={urlRef} /> 
               </div>
               <div className="d-grid gap-2">
                 <Button
