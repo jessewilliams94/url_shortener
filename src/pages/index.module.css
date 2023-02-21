@@ -9,3 +9,8 @@
     border-radius: 10px;
     padding: 2rem;
 }
+
+#animation_div {
+    width:auto;
+    height:auto;
+}

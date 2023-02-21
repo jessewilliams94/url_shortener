@@ -1,11 +1,9 @@
-import { Inter } from "@next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UrlForm from "@/components/ui/UrlForm";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import UrlModal from "@/components/ui/UrlModal";
 import { useState } from "react";
 import classes from './index.module.css';
-import LinkCreateForm from "@/ui-components/LinkCreateForm";
 
 const modalData = {
   style: 'modalSuccess',
@@ -14,7 +12,7 @@ const modalData = {
 };
 
 const modalDataArray = [
-  {style: 'modalSuccess', title: 'Success!', showCopyButton: true},
+  {style: classes.modalSuccess, title: 'Success!', showCopyButton: true},
   {style: 'modalWarning', title: 'warning', showCopyButton: false},
   {style: 'modalError', title: 'Error: Invalid URL.', showCopyButton: false}
 ]
@@ -24,7 +22,7 @@ function Home() {
   const [showModal, setShowModal] = useState(false);
   const [modalStyle, setModalStyle] = useState(modalDataArray[0]);
   const urlHandler = (result) => {
-    let newUrl = ('https://www.test.com/' + result);
+    let newUrl = ('localhost:3000/' + result);
 
     setFinalUrl(newUrl);
     if (newUrl) {
@@ -41,8 +39,8 @@ function Home() {
   };
   return (
     <div id={classes.mainpage}>
-      <UrlForm errorSubmit={errorCatcher} urlSubmit={urlHandler}></UrlForm>
-      <UrlModal open={showModal} onClose={() => setShowModal(false)} showButton={modalStyle.showCopyButton} styleId={modalStyle} displayURL={finalUrl}></UrlModal>
+        <UrlForm errorSubmit={errorCatcher} urlSubmit={urlHandler}></UrlForm>
+        <UrlModal open={showModal} onClose={() => setShowModal(false)} showButton={modalStyle.showCopyButton} styleId={modalStyle} displayURL={finalUrl}></UrlModal>
     </ div>
   );
 }
