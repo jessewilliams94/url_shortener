@@ -5,5 +5,5 @@
  **************************************************************************/
 
 export { default as studioTheme } from "./studioTheme";
-export { default as LinkCreateForm } from "./LinkCreateForm";
-export { default as LinkUpdateForm } from "./LinkUpdateForm";
+export { default as URLCreateForm } from "./URLCreateForm";
+export { default as URLUpdateForm } from "./URLUpdateForm";

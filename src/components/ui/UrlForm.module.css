@@ -9,3 +9,11 @@
 .invalid {
     background:rgb(250, 193, 193)
 }
+
+.submitMessage {
+    width: 100%;
+}
+
+@media screen {
+    
+}

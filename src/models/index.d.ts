@@ -6,30 +6,32 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 
 
-type EagerLink = {
+type EagerURL = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Link, 'id'>;
+    identifier: ManagedIdentifier<URL, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly url?: string | null;
+  readonly original: string;
+  readonly shortened: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-type LazyLink = {
+type LazyURL = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Link, 'id'>;
+    identifier: ManagedIdentifier<URL, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly url?: string | null;
+  readonly original: string;
+  readonly shortened: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-export declare type Link = LazyLoading extends LazyLoadingDisabled ? EagerLink : LazyLink
+export declare type URL = LazyLoading extends LazyLoadingDisabled ? EagerURL : LazyURL
 
-export declare const Link: (new (init: ModelInit<Link>) => Link) & {
-  copyOf(source: Link, mutator: (draft: MutableModel<Link>) => MutableModel<Link> | void): Link;
+export declare const URL: (new (init: ModelInit<URL>) => URL) & {
+  copyOf(source: URL, mutator: (draft: MutableModel<URL>) => MutableModel<URL> | void): URL;
 }

@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Link": {
-            "name": "Link",
+        "URL": {
+            "name": "URL",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,11 +10,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "url": {
-                    "name": "url",
+                "original": {
+                    "name": "original",
                     "isArray": false,
                     "type": "AWSURL",
-                    "isRequired": false,
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "shortened": {
+                    "name": "shortened",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -35,7 +42,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Links",
+            "pluralName": "URLS",
             "attributes": [
                 {
                     "type": "model",
@@ -63,5 +70,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "1609bced9339a12c0ff8698fdea329b7"
+    "version": "67cd4ea90e461ff7d7773dd55c4e9e43"
 };

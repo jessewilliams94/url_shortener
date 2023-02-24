@@ -1,3 +1,4 @@
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -6,73 +7,57 @@ import { useRef } from "react";
 import classes from "./UrlForm.module.css";
 import { useState } from "react";
 import checkUrl from "helpers/validUrl";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import { useRouter } from "next/router";
+import ReCAPTCHA from "react-google-recaptcha";
 
-// async function saveUrl(url) {
-//   const response = await fetch("/api/validation/url", {
-//     method: "POST",
-//     body: JSON.stringify(url),
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   });
-
-//   const data = response.json();
-//   if (!response.ok) {
-//     // console.log(data.message);
-//     throw new Error(data.message || "something went wrong");
-//   }
-
-//   return data;
-// }
 
 const UrlForm = (props) => {
   const urlRef = useRef();
   const [urlString, setUrlString] = useState("");
   const [validUrl, setValidUrl] = useState(true);
- 
-
-  // const generateShortUrlHandler = () => {
-  //   if (urlRef.current.value.length === 0) {
-  //     console.log("error");
-  //     return;
-  //   }
-  //   let result = "";
-  //   const characters =
-  //     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  //   const charactersLength = characters.length;
-  //   for (let i = 0; i < 6; i++) {
-  //     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  //   }
-  //   // console.log(result);
-  //   setUrlString(result);
-  //   props.urlSubmit(result);
-  // };
+  const router = useRouter();
+  const recaptchaRef = React.createRef();
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    recaptchaRef.current.execute();
 
     const submittedURL = urlRef.current.value;
 
-    fetch('/api/feedback', {
-      method: 'POST',
-      body: JSON.stringify({url: submittedURL}),
+    fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify({ url: submittedURL }),
       headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(response => response.json()).then(data => console.log(data));
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
     if (checkUrl(submittedURL) === false) {
-      props.errorSubmit('error');
+      props.errorSubmit("error");
     }
     urlRef.current.value = "";
     setValidUrl(true);
   };
+
+  const onReCAPTCHAChange = (captchaCode) => {
+    if (!captchaCode) {
+      return;
+    }
+  };
+
   return (
     <>
       <Row className="d-grid gap-2 justify-content-md-center text-center">
         <Col className="d-flex-row align-middle">
-          <h2>Please submit your URL below.</h2>
+          <h2 className={classes.submitMessage}>Please submit your URL below.</h2>
           <form method="post" onSubmit={submitHandler}>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              size="invisible"
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+              onChange={onReCAPTCHAChange}
+            />
             <div className="d-grid">
               {/* <label htmlFor="url-input">
                 </label> */}

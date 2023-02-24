@@ -4,8 +4,8 @@ import { schema } from './schema';
 
 
 
-const { Link } = initSchema(schema);
+const { URL } = initSchema(schema);
 
 export {
-  Link
+  URL
 };

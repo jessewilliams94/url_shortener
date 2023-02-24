@@ -5,9 +5,9 @@ import { redirects } from "next.config";
 const RedirectPage = ({children, href}) => {
     const router = useRouter();
 
-    const {source, destination, permanent} = redirects;
+    const {pid} = router.query;
     
-    console.log(source)
+    console.log(pid)
     return <h2>hi</h2>
 };
 

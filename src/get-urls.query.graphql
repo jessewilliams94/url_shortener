@@ -1,0 +1,7 @@
+query GetUrls {
+  url {
+    _id
+    original
+    shortened
+  }
+}
