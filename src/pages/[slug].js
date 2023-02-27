@@ -5,10 +5,10 @@ import { redirects } from "next.config";
 const RedirectPage = ({children, href}) => {
     const router = useRouter();
 
-    const {pid} = router.query;
+    const {slug} = router.query;
     
-    console.log(pid)
-    return <h2>hi</h2>
+    console.log("https://dev.d1crardsd758eu.amplifyapp.com/" + slug);
+    return <h2>{`https://dev.d1crardsd758eu.amplifyapp.com/${slug}`}</h2>
 };
 
 export default RedirectPage;

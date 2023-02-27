@@ -48,17 +48,17 @@ const UrlForm = (props) => {
 
   return (
     <>
-      <Row className="d-grid gap-2 justify-content-md-center text-center">
-        <Col className="d-flex-row align-middle">
+      <Row className={classes.row} class="d-grid gap-2 justify-content-xs-center text-center">
+        <Col className={classes.column} xs="12" class="d-flex-row align-middle">
+          <form className="min-vw-100" method="post" onSubmit={submitHandler}>
           <h2 className={classes.submitMessage}>Please submit your URL below.</h2>
-          <form method="post" onSubmit={submitHandler}>
             <ReCAPTCHA
               ref={recaptchaRef}
               size="invisible"
               sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
               onChange={onReCAPTCHAChange}
             />
-            <div className="d-grid">
+            <div class="d-grid">
               {/* <label htmlFor="url-input">
                 </label> */}
               <input
@@ -70,7 +70,7 @@ const UrlForm = (props) => {
                 ref={urlRef}
               />
             </div>
-            <div className="d-grid gap-2">
+            <div class="d-grid gap-2">
               <Button
                 // onClick={generateShortUrlHandler}
                 variant="outline-primary"

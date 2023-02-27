@@ -1,19 +1,16 @@
-#form_container {
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-
-}
-
 .invalid {
     background:rgb(250, 193, 193)
 }
 
 .submitMessage {
-    width: 100%;
+    width: auto;
 }
 
 @media screen {
     
+}
+
+.form {
+    background: beige;
+    padding: 2em;
 }

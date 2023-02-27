@@ -1,16 +1,8 @@
-#mainpage {
-    height:100%;
-    width:50vw;
-    overflow:hidden;
+.main {
+    height: 100vh;
+    width: 100vw;
     display:flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background:beige;
-    border: 2px solid black;
-    border-radius: 10px;
-    padding: 2rem;
-}
-
-#animation_div {
-    width:auto;
-    height:auto;
 }
