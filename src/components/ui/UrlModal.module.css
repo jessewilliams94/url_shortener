@@ -16,6 +16,14 @@
     background: rgb(255, 16, 16)
 }
 
+#motion {
+    height:auto;
+    width:auto;
+    background: red;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
 
 
 

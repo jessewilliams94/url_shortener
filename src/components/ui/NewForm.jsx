@@ -85,16 +85,8 @@ const NewForm = (props) => {
     <>
   <Script src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}></Script>
     <Form id="demo-form" style={formStyle} variant="primary" className="max-vw-100" method="post" onSubmit={submitHandler}>
-      <h2 >Please submit your URL below.</h2>
-      {/* <ReCAPTCHA
-        ref={recaptchaRef}
-        size="recaptcha"
-        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-        onChange={onReCAPTCHAChange}
-      /> */}
+      <h2 id={classes.h2}>Please submit your URL below.</h2>
       <div className="d-grid">
-        {/* <label htmlFor="url-input">
-                </label> */}
         <input
           name="url"
           type="string"
@@ -106,7 +98,6 @@ const NewForm = (props) => {
       </div>
       <div className="d-grid gap-2">
         <Button
-          // onClick={generateShortUrlHandler}
           variant="outline-primary"
           type="submit"
         >

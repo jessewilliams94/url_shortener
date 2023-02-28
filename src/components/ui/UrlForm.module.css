@@ -1,16 +1,35 @@
 .invalid {
-    background:rgb(250, 193, 193)
+  background: rgb(250, 193, 193);
 }
 
 .submitMessage {
-    width: auto;
+  width: auto;
 }
 
-@media screen {
-    
+@media only screen and (max-width: 280px) {
+    #h2 {
+        font-size: 0.78em;
+    }
+}
+
+@media only screen and (min-width: 281px) and (max-width: 360px) {
+    #h2 {
+        font-size: 1.1em;
+    }
+}
+
+@media only screen and (min-width: 361px) and (max-width: 393px) {
+    #h2 {
+        font-size: 1.2em;
+    }
+}
+@media only screen and (min-width: 394px) and (max-width: 600px) {
+    #h2 {
+        font-size: 1.4em;
+    }
 }
 
 .form {
-    background: beige;
-    padding: 2em;
+  background: beige;
+  padding: 2em;
 }
