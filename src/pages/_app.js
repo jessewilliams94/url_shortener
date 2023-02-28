@@ -1,9 +1,9 @@
-import '@/styles/globals.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import {Amplify} from "aws-amplify"
-import awsconfig from "/src/aws-exports"
-import '@aws-amplify/ui-react/styles.css'
-
+import "@/styles/globals.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Amplify } from "aws-amplify";
+import awsconfig from "/src/aws-exports";
+import "@aws-amplify/ui-react/styles.css";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 // import * as AWS from 'aws-sdk';
 // import { ConfigurationOptions } from 'aws-sdk';
@@ -16,11 +16,22 @@ import '@aws-amplify/ui-react/styles.css'
 
 // AWS.config.update(configuration);
 
-Amplify.configure({...awsconfig,ssr:true})
+Amplify.configure({ ...awsconfig, ssr: true });
 
 function MyApp({ Component, pageProps }) {
-      return  <Component {...pageProps} />
-   
+  return (
+    <GoogleReCaptchaProvider
+      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTHA_SITE_KEY}
+      scriptProps={{
+        async: false, // optional, default to false,
+        defer: true, // optional, default to false
+        appendTo: "body", // optional, default to "head", can be "head" or "body",
+        nonce: undefined,
+      }}
+    >
+      <Component {...pageProps} />
+    </GoogleReCaptchaProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

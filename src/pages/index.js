@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import UrlForm from "@/components/ui/UrlForm";
 import NewForm from "@/components/ui/NewForm";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import { Fragment } from "react";
+import React from "react";
 import UrlModal from "@/components/ui/UrlModal";
 import { useState } from "react";
 import classes from "./index.module.css";
@@ -23,11 +23,12 @@ function Home() {
   const [finalUrl, setFinalUrl] = useState();
   const [showModal, setShowModal] = useState(false);
   const [modalStyle, setModalStyle] = useState(modalDataArray[0]);
+  const recaptchaRef = React.createRef();
 
   const onCreateUrl = (shortenedUrl) => {
-      setFinalUrl(shortenedUrl);
-      setModalStyle(modalDataArray[0])
-      setShowModal(true);
+    setFinalUrl(shortenedUrl);
+    setModalStyle(modalDataArray[0]);
+    setShowModal(true);
   };
 
   // const urlHandler = (result) => {
@@ -46,13 +47,20 @@ function Home() {
       setShowModal(true);
     }
   };
+
+  const onReCAPTCHAChange = (captchaCode) => {
+    if (!captchaCode) {
+      return;
+    }
+  };
   return (
+    
     <main className={classes.main}>
       <SEO
         pageTitle="Short"
         pageDescription="Welcome to my URL shortener application."
       />
-      <NewForm onSubmit={onCreateUrl} errorSubmit={errorCatcher} ></NewForm>
+      <NewForm onSubmit={onCreateUrl} errorSubmit={errorCatcher}></NewForm>
       <UrlModal
         open={showModal}
         onClose={() => setShowModal(false)}

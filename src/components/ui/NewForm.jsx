@@ -1,25 +1,47 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Form } from "react-bootstrap";
-
 import { useRef } from "react";
 import classes from "./UrlForm.module.css";
 import { useState } from "react";
 import checkUrl from "helpers/validUrl";
-import { useRouter } from "next/router";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import Script from "next/script";
 
 const NewForm = (props) => {
   const urlRef = useRef();
-  const [urlString, setUrlString] = useState("");
   const [validUrl, setValidUrl] = useState(true);
-  const router = useRouter();
-  const recaptchaRef = React.createRef();
+  const [fname, setFName] = useState('');
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    recaptchaRef.current.execute();
 
+    let data = {fname};
+
+    grecaptcha.ready(function () {
+      grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: 'submit' })
+        .then(function (token) {
+
+          data.token = token
+          fetch('/api/contactRoute', {
+            method: 'POST',
+            body: JSON.stringify(data),
+          })
+            .then(response => {
+              console.log("Client Side Response: ", response)
+              if (response.status === 500) {
+                //error handler
+              } else {
+                //all good
+              }
+            })
+            .catch(err => {
+              console.log("Error: ", err);
+            })
+        })
+    })
 
     const submittedURL = urlRef.current.value;
 
@@ -27,6 +49,7 @@ const NewForm = (props) => {
       props.errorSubmit("error");
       return;
     }
+
 
     let result = "";
       const characters =
@@ -54,22 +77,21 @@ const NewForm = (props) => {
     setValidUrl(true);
   };
 
-  const onReCAPTCHAChange = (captchaCode) => {
-    if (!captchaCode) {
-      return;
-    }
-  };
+
   const formStyle = {backgroundColor: "white", border: "1px solid black", borderRadius: "5px" , padding: "2em", boxShadow: "0.5px 0.5px 2px black", margin: "1em"};
 
+
   return (
-    <Form style={formStyle} variant="primary" className="max-vw-100" method="post" onSubmit={submitHandler}>
+    <>
+  <Script src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}></Script>
+    <Form id="demo-form" style={formStyle} variant="primary" className="max-vw-100" method="post" onSubmit={submitHandler}>
       <h2 >Please submit your URL below.</h2>
-      <ReCAPTCHA
+      {/* <ReCAPTCHA
         ref={recaptchaRef}
-        size="invisible"
+        size="recaptcha"
         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
         onChange={onReCAPTCHAChange}
-      />
+      /> */}
       <div className="d-grid">
         {/* <label htmlFor="url-input">
                 </label> */}
@@ -92,12 +114,7 @@ const NewForm = (props) => {
         </Button>
       </div>
     </Form>
-    // <Form>
-    //   <Form.Group className="mb-3">
-    //     <Form.Control placeholder="https://www.please-enter-your-URL-here.com" type="url"></Form.Control>
-    //   </Form.Group>
-    //   <Button variant="primary">Submit</Button>
-    // </Form>
+    </>
   );
 };
 
