@@ -15,13 +15,15 @@ async function handler(req, res) {
   if (req.method === "POST") {
     const url = req.body.url;
     const shortUrl = req.body.shortUrl;
+    const urlId = req.body.urlId;
 
     if (checkUrl(url)) {
       
       const params = {
         TableName: "Urls",
         Item: {
-          id: Math.floor(Math.random() * 10000),
+          user: "jesse",
+          id: urlId,
           dateAdded: new Date().toLocaleString(),
           dateModified: "",
           link_original: url,

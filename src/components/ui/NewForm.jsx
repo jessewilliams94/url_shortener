@@ -28,7 +28,7 @@ const NewForm = (props) => {
       return;
     }
 
-    let result = "https://dev.d1crardsd758eu.amplifyapp.com/";
+    let result = "";
       const characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
       const charactersLength = characters.length;
@@ -38,11 +38,11 @@ const NewForm = (props) => {
         );
       }
 
-    const shortenedUrl = result;
+    const shortenedUrl = "https://dev.d1crardsd758eu.amplifyapp.com/" + result;
 
     fetch("/api/feedback", {
       method: "POST",
-      body: JSON.stringify({ url: submittedURL, shortUrl: shortenedUrl }),
+      body: JSON.stringify({ urlId: result, url: submittedURL, shortUrl: shortenedUrl }),
       headers: {
         "Content-Type": "application/json",
       },

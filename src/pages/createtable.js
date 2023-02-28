@@ -8,10 +8,10 @@ export const params = {
   AttributeDefinitions: [
     {
       AttributeName: "id", //Primary Key name
-      AttributeType: "N", //Type of the primary key
+      AttributeType: "S", //Type of the primary key
     },
     {
-      AttributeName: "dateAdded", //Sort key name
+      AttributeName: "user", //Sort key name
       AttributeType: "S", //Type of the sort key
     },
   ],
@@ -24,7 +24,7 @@ export const params = {
       KeyType: "HASH",
     },
     {
-      AttributeName: "dateAdded", //Sort key name
+      AttributeName: "user", //Sort key name
       KeyType: "RANGE",
     },
   ],
