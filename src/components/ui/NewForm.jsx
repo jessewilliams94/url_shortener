@@ -13,7 +13,7 @@ const NewForm = (props) => {
   const [validUrl, setValidUrl] = useState(true);
   const [fname, setFName] = useState('');
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
+
 
   const submitHandler = async (event) => {
     event.preventDefault();

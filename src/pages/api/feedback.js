@@ -13,16 +13,17 @@ import { ddbDocClient } from "config/ddbDocClient";
 async function handler(req, res) {
   // const router = useRouter();
   if (req.method === "POST") {
-    const url = req.body.url;
-    const shortUrl = req.body.shortUrl;
-    const urlId = req.body.urlId;
+    const  {url, shortUrl, urlId} = req.body;
+
+    console.log(url);
+
 
     if (checkUrl(url)) {
       
       const params = {
         TableName: "Urls",
         Item: {
-          user: "jesse",
+          user: "anonymous",
           id: urlId,
           dateAdded: new Date().toLocaleString(),
           dateModified: "",

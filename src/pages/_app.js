@@ -21,7 +21,7 @@ Amplify.configure({ ...awsconfig, ssr: true });
 function MyApp({ Component, pageProps }) {
   return (
     <GoogleReCaptchaProvider
-      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTHA_SITE_KEY}
+      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY}
       scriptProps={{
         async: false, // optional, default to false,
         defer: true, // optional, default to false

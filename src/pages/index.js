@@ -22,6 +22,7 @@ function Home() {
   const [showModal, setShowModal] = useState(false);
   const [modalStyle, setModalStyle] = useState(modalDataArray[0]);
 
+
   const onCreateUrl = (shortenedUrl) => {
     setFinalUrl(shortenedUrl);
     setModalStyle(modalDataArray[0]);

@@ -39,7 +39,7 @@ export async function getServerSideProps({ params }) {
     TableName: "Urls",
     Key: {
       id: { S: redirect },
-      user: { S: "jesse" },
+      user: { S: "anonymous" },
     },
   };
 
