@@ -10,7 +10,7 @@ import { ReCaptchaProvider } from "next-recaptcha-v3";
 
 // const configuration: ConfigurationOptions = {
 //       region: 'us-east-2',
-//       secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
+//       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 //       accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID
 // }
 

@@ -73,7 +73,7 @@ const NewForm = (props) => {
   // });
 
   const handleChange = (value) => {
-    console.log('captcha value: ', value); 
+    // console.log('captcha value: ', value); 
     setVerified(true);
   };
 
@@ -97,12 +97,7 @@ const NewForm = (props) => {
         onSubmit={submitHandler}
       >
         <h2 id={classes.h2}>Please submit your URL below.</h2>
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          size="normal"
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-          onChange={handleChange}
-        />
+        
         <div className="d-grid">
           <input
             name="url"
@@ -120,11 +115,19 @@ const NewForm = (props) => {
             // onChange={onReCAPTCHAChange}
             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
           /> */}
-          {verified && <Button variant="outline-primary" type="submit">
+          {verified && <Button variant="primary" type="submit">
             Submit
-          </Button> || ''}
+          </Button> || <Button disabled variant="primary" type="submit">Submit</Button>}
           
+
+          <ReCAPTCHA
+          ref={recaptchaRef}
+          size="normal"
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+          onChange={handleChange}
+        />
         </div>
+      
       </Form>
     </>
   );
