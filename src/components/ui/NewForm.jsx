@@ -118,8 +118,6 @@ const NewForm = (props) => {
           {verified && <Button variant="primary" type="submit">
             Submit
           </Button> || <Button disabled variant="primary" type="submit">Submit</Button>}
-          
-
           <ReCAPTCHA
           ref={recaptchaRef}
           size="normal"
