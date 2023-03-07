@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Amplify } from "aws-amplify";
 import awsconfig from "/src/aws-exports";
 import "@aws-amplify/ui-react/styles.css";
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 
 // import * as AWS from 'aws-sdk';
 // import { ConfigurationOptions } from 'aws-sdk';
@@ -20,17 +20,9 @@ Amplify.configure({ ...awsconfig, ssr: true });
 
 function MyApp({ Component, pageProps }) {
   return (
-    <GoogleReCaptchaProvider
-      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY}
-      scriptProps={{
-        async: false, // optional, default to false,
-        defer: true, // optional, default to false
-        appendTo: "body", // optional, default to "head", can be "head" or "body",
-        nonce: undefined,
-      }}
-    >
+    
       <Component {...pageProps} />
-    </GoogleReCaptchaProvider>
+
   );
 }
 

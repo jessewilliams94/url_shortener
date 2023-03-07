@@ -3,45 +3,32 @@ import Button from "react-bootstrap/Button";
 import { Form } from "react-bootstrap";
 import { useRef } from "react";
 import classes from "./UrlForm.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import checkUrl from "helpers/validUrl";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import Script from "next/script";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const NewForm = (props) => {
   const urlRef = useRef();
   const [validUrl, setValidUrl] = useState(true);
-  const [fname, setFName] = useState('');
-
+  const recaptchaRef = useRef(null);
+  const [verified, setVerified] = useState(false);
+  // const [fname, setFName] = useState("");
+  // const recaptchaRef = useRef(null);
 
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    let data = {fname};
+    if (grecaptcha.getResponse() === '') {
+      event.preventDefault()
+      alert("Please click <I'm not a robot> before sending the job")
+      return;
+    }
 
-    grecaptcha.ready(function () {
-      grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: 'submit' })
-        .then(function (token) {
+    const captchaToken = recaptchaRef.current.value;
+    // let data = { fname };
 
-          data.token = token
-          fetch('/api/contactRoute', {
-            method: 'POST',
-            body: JSON.stringify(data),
-          })
-            .then(response => {
-              console.log("Client Side Response: ", response)
-              if (response.status === 500) {
-                //error handler
-              } else {
-                //all good
-              }
-            })
-            .catch(err => {
-              console.log("Error: ", err);
-            })
-        })
-    })
+    // recaptchaRef.current.execute();
 
     const submittedURL = urlRef.current.value;
 
@@ -50,61 +37,95 @@ const NewForm = (props) => {
       return;
     }
 
-
     let result = "";
-      const characters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      const charactersLength = characters.length;
-      for (let i = 0; i < 6; i++) {
-        result += characters.charAt(
-          Math.floor(Math.random() * charactersLength)
-        );
-      }
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+    for (let i = 0; i < 6; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
 
     const shortenedUrl = "https://dev.d1crardsd758eu.amplifyapp.com/" + result;
 
     fetch("/api/feedback", {
       method: "POST",
-      body: JSON.stringify({ urlId: result, url: submittedURL, shortUrl: shortenedUrl }),
+      body: JSON.stringify({
+        urlId: result,
+        url: submittedURL,
+        shortUrl: shortenedUrl
+      }),
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => console.log(data));
-      props.onSubmit(shortenedUrl);
+    props.onSubmit(shortenedUrl);
     urlRef.current.value = "";
     setValidUrl(true);
   };
 
+  // function onReCAPTCHAChange(token) {
+  //   console.log(token);
+  // }
+  // const onVerify = useCallback((token) => {
+  //   setToken(token);
+  // });
 
-  const formStyle = {backgroundColor: "white", border: "1px solid black", borderRadius: "5px" , padding: "2em", boxShadow: "0.5px 0.5px 2px black", margin: "1em"};
+  const handleChange = (value) => {
+    console.log('captcha value: ', value); 
+    setVerified(true);
+  };
 
+  const formStyle = {
+    backgroundColor: "white",
+    border: "1px solid black",
+    borderRadius: "5px",
+    padding: "2em",
+    boxShadow: "0.5px 0.5px 2px black",
+    margin: "1em",
+  };
 
   return (
     <>
-  <Script src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}></Script>
-    <Form id="demo-form" style={formStyle} variant="primary" className="max-vw-100" method="post" onSubmit={submitHandler}>
-      <h2 id={classes.h2}>Please submit your URL below.</h2>
-      <div className="d-grid">
-        <input
-          name="url"
-          type="string"
-          className={`${validUrl && classes.url} ${
-            !validUrl && classes.invalid
-          }`}
-          ref={urlRef}
+      <Form
+        id="demo-form"
+        style={formStyle}
+        variant="primary"
+        className="max-vw-100"
+        method="post"
+        onSubmit={submitHandler}
+      >
+        <h2 id={classes.h2}>Please submit your URL below.</h2>
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          size="normal"
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+          onChange={handleChange}
         />
-      </div>
-      <div className="d-grid gap-2">
-        <Button
-          variant="outline-primary"
-          type="submit"
-        >
-          Submit
-        </Button>
-      </div>
-    </Form>
+        <div className="d-grid">
+          <input
+            name="url"
+            type="string"
+            className={`${validUrl && classes.url} ${
+              !validUrl && classes.invalid
+            }`}
+            ref={urlRef}
+          />
+        </div>
+        <div className="d-grid gap-2">
+          {/* <GoogleReCAPTCHA
+            onVerify={onVerify}
+            ref={recaptchaRef}
+            // onChange={onReCAPTCHAChange}
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+          /> */}
+          {verified && <Button variant="outline-primary" type="submit">
+            Submit
+          </Button> || ''}
+          
+        </div>
+      </Form>
     </>
   );
 };

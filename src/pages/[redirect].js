@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import { dynamodb } from "../../config/awsconfig";
 
 const RedirectPage = ({ item, isVisible }) => {
-
   // const leftAnimation = {left: '-50vw'};
   // const rightAnimation = {left: '50vw'};
   // const topAnimation = {top: '-50vh'};
   // const bottomAnimation = {top: '50vh'}
+  // console.log(redirect)
 
   useEffect(() => {
+    console.log(item.link_original)
     window.location.href = item.link_original.S;
   }, [item.link_original.S]);
 
@@ -34,6 +35,7 @@ return null;
 
 export async function getServerSideProps({ params }) {
   const { redirect } = params;
+  console.log(redirect)
 
   const parameters = {
     TableName: "Urls",

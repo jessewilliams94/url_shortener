@@ -6,7 +6,7 @@ import React from "react";
 import UrlModal from "@/components/ui/UrlModal";
 import { useState } from "react";
 import classes from "./index.module.css";
-import SEO from "@/components/wraps/seo";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 
 import * as mutations from "../../src/graphql/mutations";
@@ -38,12 +38,7 @@ function Home() {
   };
 
   return (
-    
     <main className={classes.main}>
-      <SEO
-        pageTitle="Short"
-        pageDescription="Welcome to my URL shortener application."
-      />
       <NewForm onSubmit={onCreateUrl} errorSubmit={errorCatcher}></NewForm>
       <UrlModal
         open={showModal}
